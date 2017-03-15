@@ -1,0 +1,13 @@
+
+
+#platform :ios '9.0'
+
+target  'TwitterAppDemoLBTA' do
+
+  use_frameworks!
+
+#pods for TwitterAppDemoLBTA
+
+pod 'LBTAComponents', '~> 0.1.9'
+
+end
