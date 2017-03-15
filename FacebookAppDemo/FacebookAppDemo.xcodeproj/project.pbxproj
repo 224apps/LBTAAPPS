@@ -12,6 +12,7 @@
 		49EE6F351E78FEA90090FEB5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49EE6F341E78FEA90090FEB5 /* Assets.xcassets */; };
 		49EE6F381E78FEA90090FEB5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49EE6F361E78FEA90090FEB5 /* LaunchScreen.storyboard */; };
 		49EE6F431E78FEA90090FEB5 /* FacebookAppDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EE6F421E78FEA90090FEB5 /* FacebookAppDemoTests.swift */; };
+		49EE6F4E1E7909340090FEB5 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EE6F4D1E7909340090FEB5 /* FeedCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +35,7 @@
 		49EE6F3E1E78FEA90090FEB5 /* FacebookAppDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FacebookAppDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		49EE6F421E78FEA90090FEB5 /* FacebookAppDemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookAppDemoTests.swift; sourceTree = "<group>"; };
 		49EE6F441E78FEA90090FEB5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		49EE6F4D1E7909340090FEB5 /* FeedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 			children = (
 				49EE6F2D1E78FEA90090FEB5 /* AppDelegate.swift */,
 				49EE6F2F1E78FEA90090FEB5 /* HomeViewController.swift */,
+				49EE6F4D1E7909340090FEB5 /* FeedCell.swift */,
 				49EE6F341E78FEA90090FEB5 /* Assets.xcassets */,
 				49EE6F361E78FEA90090FEB5 /* LaunchScreen.storyboard */,
 				49EE6F391E78FEA90090FEB5 /* Info.plist */,
@@ -199,6 +202,7 @@
 			files = (
 				49EE6F301E78FEA90090FEB5 /* HomeViewController.swift in Sources */,
 				49EE6F2E1E78FEA90090FEB5 /* AppDelegate.swift in Sources */,
+				49EE6F4E1E7909340090FEB5 /* FeedCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,6 +404,7 @@
 				49EE6F491E78FEA90090FEB5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		49EE6F4A1E78FEA90090FEB5 /* Build configuration list for PBXNativeTarget "FacebookAppDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -408,6 +413,7 @@
 				49EE6F4C1E78FEA90090FEB5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
