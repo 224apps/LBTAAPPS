@@ -12,6 +12,8 @@
 		497F72BB1E2F2F57004A2C18 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 497F72BA1E2F2F57004A2C18 /* Assets.xcassets */; };
 		497F72BE1E2F2F57004A2C18 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 497F72BC1E2F2F57004A2C18 /* LaunchScreen.storyboard */; };
 		497F72C91E2F2F57004A2C18 /* AppstoreDemoLBTATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497F72C81E2F2F57004A2C18 /* AppstoreDemoLBTATests.swift */; };
+		49E3DD4F1E941E6000635C0A /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E3DD4E1E941E6000635C0A /* CategoryCell.swift */; };
+		49E3DD511E94262100635C0A /* HorAppCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E3DD501E94262100635C0A /* HorAppCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +36,8 @@
 		497F72C41E2F2F57004A2C18 /* AppstoreDemoLBTATests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppstoreDemoLBTATests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		497F72C81E2F2F57004A2C18 /* AppstoreDemoLBTATests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppstoreDemoLBTATests.swift; sourceTree = "<group>"; };
 		497F72CA1E2F2F57004A2C18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		49E3DD4E1E941E6000635C0A /* CategoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
+		49E3DD501E94262100635C0A /* HorAppCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HorAppCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +81,8 @@
 			children = (
 				497F72B31E2F2F57004A2C18 /* AppDelegate.swift */,
 				497F72B51E2F2F57004A2C18 /* HomeViewController.swift */,
+				49E3DD4E1E941E6000635C0A /* CategoryCell.swift */,
+				49E3DD501E94262100635C0A /* HorAppCell.swift */,
 				497F72BA1E2F2F57004A2C18 /* Assets.xcassets */,
 				497F72BC1E2F2F57004A2C18 /* LaunchScreen.storyboard */,
 				497F72BF1E2F2F57004A2C18 /* Info.plist */,
@@ -198,7 +204,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				497F72B61E2F2F57004A2C18 /* HomeViewController.swift in Sources */,
+				49E3DD511E94262100635C0A /* HorAppCell.swift in Sources */,
 				497F72B41E2F2F57004A2C18 /* AppDelegate.swift in Sources */,
+				49E3DD4F1E941E6000635C0A /* CategoryCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,6 +408,7 @@
 				497F72CF1E2F2F57004A2C18 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		497F72D01E2F2F57004A2C18 /* Build configuration list for PBXNativeTarget "AppstoreDemoLBTATests" */ = {
 			isa = XCConfigurationList;
@@ -408,6 +417,7 @@
 				497F72D21E2F2F57004A2C18 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

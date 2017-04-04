@@ -8,10 +8,10 @@
 
 import UIKit
 
- let cellID = "CellID"
+let cellID = "CellID"
 
 class HomeViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout{
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -32,7 +32,6 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
 
 extension HomeViewController {
     
-
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -42,8 +41,7 @@ extension HomeViewController {
     }
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath)
-         cell.backgroundColor = .white
-        
+        cell.backgroundColor = .white
         return cell
     }
 }
