@@ -55,7 +55,60 @@ class AppCategory: NSObject {
         
         return [bestNewAppsCategory, bestNewGameCategory ]
     }
+    //MARK:- Fetching the data  using the REST API..
+    
+    static func fetchingData(){
+        
+        
+        let urlString = "http://www.statsallday.com/appstore/featured"
+        
+        let url = URL(string: urlString)
+        
+      let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
+            
+            do{
+                let json =  try JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
+                
+                var appCategories = [AppCategory]()
+                
+                for dict in json["categories"] as! [[String:AnyObject]]{
+                    let appCategory = AppCategory()
+                    appCategory.set
+                    appCategories.append(appCategory)
+                }
+                
+            } catch  let err  {
+                print(err)
+            }
+        }
+            
+     task.resume()
+    }
+    
+    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
