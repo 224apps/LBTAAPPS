@@ -10,6 +10,22 @@ import UIKit
 
 class HorAppCell: UICollectionViewCell{
     
+    
+    
+    var app: App? {
+        if let name = app?.name {
+             nameLabel.text = name
+        }
+        
+         categoryLabel.text = app?.category
+        if let  price = app?.price {
+            priceLabel.text = "$\(price)"
+        } else {
+             priceLabel.text = app?.price?.stringValue
+        }
+        
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -58,15 +74,11 @@ class HorAppCell: UICollectionViewCell{
         pl.translatesAutoresizingMaskIntoConstraints = false
         return pl
     }()
-    
-    
-    
     func setUpViews(){
         addSubview(imageView)
         addSubview(nameLabel)
         addSubview(categoryLabel)
         addSubview(priceLabel)
-        
         imageView.frame =  CGRect(x: 0, y: 0, width: frame.width, height: frame.width)
         nameLabel.frame =  CGRect(x: 0, y: frame.width + 2, width: frame.width, height: 40)
         categoryLabel.frame = CGRect(x: 0, y: frame.width + 38, width: frame.width, height: 20)

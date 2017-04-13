@@ -13,12 +13,26 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
     
     let cellID = "CellID"
     
+    
+    
+    var appCategory : AppCategory? {
+        
+        didSet{
+            if let name = appCategory?.name {
+                
+            }
+        }
+    }
+    var  categories : [AppCategory]?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        // Do any additional setup after loading the view, typically f  rom a nib.
         
         collectionView?.backgroundColor = .white
         collectionView?.register(CategoryCell.self, forCellWithReuseIdentifier: cellID)
+        
+        categories = AppCategory.sampleAppCategories()
     
     }
     
@@ -26,13 +40,17 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        if let count = categories?.count{
+         return count
+        }
+         return 0
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        
+       return 3
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell

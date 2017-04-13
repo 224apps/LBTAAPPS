@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		491C2BD01E9EEE6400F6DEF0 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491C2BCF1E9EEE6400F6DEF0 /* App.swift */; };
 		497F72B41E2F2F57004A2C18 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497F72B31E2F2F57004A2C18 /* AppDelegate.swift */; };
 		497F72B61E2F2F57004A2C18 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497F72B51E2F2F57004A2C18 /* HomeViewController.swift */; };
 		497F72BB1E2F2F57004A2C18 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 497F72BA1E2F2F57004A2C18 /* Assets.xcassets */; };
@@ -14,6 +15,7 @@
 		497F72C91E2F2F57004A2C18 /* AppstoreDemoLBTATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497F72C81E2F2F57004A2C18 /* AppstoreDemoLBTATests.swift */; };
 		49E3DD4F1E941E6000635C0A /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E3DD4E1E941E6000635C0A /* CategoryCell.swift */; };
 		49E3DD511E94262100635C0A /* HorAppCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E3DD501E94262100635C0A /* HorAppCell.swift */; };
+		49E3DD541E9446A500635C0A /* AppCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E3DD531E9446A500635C0A /* AppCategory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		491C2BCF1E9EEE6400F6DEF0 /* App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		497F72B01E2F2F57004A2C18 /* AppstoreDemoLBTA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppstoreDemoLBTA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		497F72B31E2F2F57004A2C18 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		497F72B51E2F2F57004A2C18 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -38,6 +41,7 @@
 		497F72CA1E2F2F57004A2C18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		49E3DD4E1E941E6000635C0A /* CategoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		49E3DD501E94262100635C0A /* HorAppCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HorAppCell.swift; sourceTree = "<group>"; };
+		49E3DD531E9446A500635C0A /* AppCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCategory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +83,7 @@
 		497F72B21E2F2F57004A2C18 /* AppstoreDemoLBTA */ = {
 			isa = PBXGroup;
 			children = (
+				49E3DD521E94469000635C0A /* Models */,
 				497F72B31E2F2F57004A2C18 /* AppDelegate.swift */,
 				497F72B51E2F2F57004A2C18 /* HomeViewController.swift */,
 				49E3DD4E1E941E6000635C0A /* CategoryCell.swift */,
@@ -97,6 +102,15 @@
 				497F72CA1E2F2F57004A2C18 /* Info.plist */,
 			);
 			path = AppstoreDemoLBTATests;
+			sourceTree = "<group>";
+		};
+		49E3DD521E94469000635C0A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				49E3DD531E9446A500635C0A /* AppCategory.swift */,
+				491C2BCF1E9EEE6400F6DEF0 /* App.swift */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -204,7 +218,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				497F72B61E2F2F57004A2C18 /* HomeViewController.swift in Sources */,
+				49E3DD541E9446A500635C0A /* AppCategory.swift in Sources */,
 				49E3DD511E94262100635C0A /* HorAppCell.swift in Sources */,
+				491C2BD01E9EEE6400F6DEF0 /* App.swift in Sources */,
 				497F72B41E2F2F57004A2C18 /* AppDelegate.swift in Sources */,
 				49E3DD4F1E941E6000635C0A /* CategoryCell.swift in Sources */,
 			);

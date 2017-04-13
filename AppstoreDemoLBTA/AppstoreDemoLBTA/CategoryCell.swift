@@ -9,9 +9,15 @@
 import UIKit
 
 class CategoryCell: UICollectionViewCell , UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    
     let horCellID = "HorCellID"
     
+    var appCategories: [AppCategory]? {
+        
+          if  let name = appCategories.
+        
+        
+    }
+
     //Let's create the nameLabel for this cell...
     
     let nameLabel : UILabel = {
@@ -52,6 +58,7 @@ class CategoryCell: UICollectionViewCell , UICollectionViewDelegate, UICollectio
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+         self.appCategories = nil
     }
     
     
@@ -86,16 +93,24 @@ class CategoryCell: UICollectionViewCell , UICollectionViewDelegate, UICollectio
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        
+        if let count = appCategories?.count {
+            return count
+        }
+        return 0
         
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
+        if let count = AppCategory.apps?.count{
+            return count
+        }
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = horCollectionView.dequeueReusableCell(withReuseIdentifier: horCellID, for: indexPath)
+        let cell = horCollectionView.dequeueReusableCell(withReuseIdentifier: horCellID, for: indexPath) as! CategoryCell
+         cell.appCategory = appCategory
         
         return cell
     }
