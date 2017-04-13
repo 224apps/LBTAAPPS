@@ -13,7 +13,6 @@ class AppCategory: NSObject {
     var name: String?
     var apps :[App]?
     
-    
     static func sampleAppCategories() -> [AppCategory] {
         
         var apps = [App]()
@@ -30,7 +29,7 @@ class AppCategory: NSObject {
         
         let  gmailApp = App()
         gmailApp.name = "Gmail"
-        gmailApp.category = "Entertaiment"
+        gmailApp.category = "Utility"
         gmailApp.imageName = "gmail"
         gmailApp.price = NSNumber(value:1.99)
         gmailApp.id = 2
@@ -39,12 +38,9 @@ class AppCategory: NSObject {
         apps.append(gmailApp)
         bestNewAppsCategory.apps = apps
         
-        
-        
         let  bestNewGameCategory = AppCategory()
         bestNewAppsCategory.name = "Best New Games"
-        
-        let bestNewGamesApps = [App]()
+        var bestNewGamesApps = [App]()
         
         let game1 = App()
         game1.name = "Game 1"
@@ -53,8 +49,9 @@ class AppCategory: NSObject {
         game1.category = " Game"
         game1.price = NSNumber(value: 1.99)
         
-        bestNewGameCategory.apps = bestNewGamesApps
+        bestNewGamesApps.append(game1)
         
+        bestNewGameCategory.apps = bestNewGamesApps
         
         return [bestNewAppsCategory, bestNewGameCategory ]
     }

@@ -11,13 +11,16 @@ import UIKit
 class CategoryCell: UICollectionViewCell , UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     let horCellID = "HorCellID"
     
-    var appCategories: [AppCategory]? {
-        
-          if  let name = appCategories.
-        
+    var appCategory: AppCategory? {
+        didSet{
+            if let name = appCategory?.name {
+                nameLabel.text = name
+            }
+            
+        }
         
     }
-
+    
     //Let's create the nameLabel for this cell...
     
     let nameLabel : UILabel = {
@@ -40,7 +43,6 @@ class CategoryCell: UICollectionViewCell , UICollectionViewDelegate, UICollectio
     
     //let's create a divider line View
     let  dividerLineView: UIView = {
-        
         let dv = UIView()
         dv.backgroundColor = UIColor(white: 0.4, alpha: 0.4)
         dv.translatesAutoresizingMaskIntoConstraints = false
@@ -58,7 +60,6 @@ class CategoryCell: UICollectionViewCell , UICollectionViewDelegate, UICollectio
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-         self.appCategories = nil
     }
     
     
@@ -78,11 +79,11 @@ class CategoryCell: UICollectionViewCell , UICollectionViewDelegate, UICollectio
                                                       options: NSLayoutFormatOptions(),
                                                       metrics: nil,
                                                       views: ["v0":dividerLineView]
-    ))
+        ))
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-14-[v0]|",
-                                                          options: NSLayoutFormatOptions(),
-                                                          metrics: nil,
-                                                          views: ["v0":nameLabel]
+                                                      options: NSLayoutFormatOptions(),
+                                                      metrics: nil,
+                                                      views: ["v0":nameLabel]
         ))
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[nameLabel(30)][v0][v1(0.5)]|",
                                                       options: NSLayoutFormatOptions(),
@@ -92,25 +93,18 @@ class CategoryCell: UICollectionViewCell , UICollectionViewDelegate, UICollectio
         
     }
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        
-        if let count = appCategories?.count {
-            return count
-        }
-        return 0
-        
-    }
+    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let count = AppCategory.apps?.count{
+        if let count = appCategory?.apps?.count {
             return count
         }
         return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = horCollectionView.dequeueReusableCell(withReuseIdentifier: horCellID, for: indexPath) as! CategoryCell
-         cell.appCategory = appCategory
+        let cell = horCollectionView.dequeueReusableCell(withReuseIdentifier: horCellID, for: indexPath) as! HorAppCell
+        cell.app = appCategory?.apps?[indexPath.item]
         
         return cell
     }
