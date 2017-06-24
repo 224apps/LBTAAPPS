@@ -16,32 +16,14 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
     
     var  categories : [AppCategory]?
     
-    override func setValue(_ value: Any?, forKey key: String) {
-        
-         var appsCategories = [AppCategory]()
-        if key == "apps" {
-            let appCategory = AppCategory()
-            for dict in value as! [[String:AnyObject]] {
-                 appCategory.setValuesForKeys(dict)
-                appsCategories.append(appCategory)
-            }
-            
-            print(appsCategories)
-        }else{
-            setValue(value, forKey: key)
-        }
-            
-            
-    }
-    
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically f  rom a nib.
         
        // categories = AppCategory.sampleAppCategories()
-        
          AppCategory.fetchingData()
-        
+    
         collectionView?.backgroundColor = .white
         collectionView?.register(CategoryCell.self, forCellWithReuseIdentifier: cellID)
         

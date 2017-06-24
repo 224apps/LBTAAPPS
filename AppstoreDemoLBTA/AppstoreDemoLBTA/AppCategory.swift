@@ -12,7 +12,29 @@ class AppCategory: NSObject {
     
     var name: String?
     var apps :[App]?
+    var type:String?
     
+    
+    override func setValue(_ value: Any?, forKey key: String) {
+
+        if key == "apps" {
+            apps = [App]()
+            for dict in value as! [[String:AnyObject]] {
+                 let app = App()
+                app.setValuesForKeys(dict)
+                apps?.append(app)
+            }
+            print(apps!)
+        }else{
+            setValue(value, forKey: key)
+        }
+        
+        
+    }
+    
+    
+
+
     static func sampleAppCategories() -> [AppCategory] {
         
         var apps = [App]()
@@ -46,7 +68,7 @@ class AppCategory: NSObject {
         game1.name = "Game 1"
         game1.id = 1
         game1.imageName = "app1"
-        game1.category = " Game"
+        game1.category = "Game"
         game1.price = NSNumber(value: 1.99)
         
         bestNewGamesApps.append(game1)
@@ -58,31 +80,30 @@ class AppCategory: NSObject {
     //MARK:- Fetching the data  using the REST API..
     
     static func fetchingData(){
-        
-        
         let urlString = "http://www.statsallday.com/appstore/featured"
-        
         let url = URL(string: urlString)
-        
-      let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
+        let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
             
-            do{
-                let json =  try JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
-                
-                var appCategories = [AppCategory]()
-                
-                for dict in json["categories"] as! [[String:AnyObject]]{
-                    let appCategory = AppCategory()
-                    appCategory.set
-                    appCategories.append(appCategory)
-                }
-                
-            } catch  let err  {
-                print(err)
+            if error != nil{
+                print(error!)
+            }
+           
+                    do {
+                        
+                        let json =  try? JSONSerialization.jsonObject(with: data!, options: [])
+                        
+                        if let dictionary = json as? [String: Any] {
+                            for dictCat in  (dictionary["categories"] as? [[String:Any]])!{
+                                 print(dictCat)
+                            }
+                        }
+                    } catch let error as NSError {
+                        
+                        print(error)
             }
         }
-            
-     task.resume()
+
+        task.resume()
     }
     
     
