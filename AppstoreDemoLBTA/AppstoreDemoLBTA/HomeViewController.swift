@@ -12,8 +12,6 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
     
     
     let cellID = "CellID"
-    
-    
     var  categories : [AppCategory]?
     
   
@@ -23,11 +21,11 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
         
        // categories = AppCategory.sampleAppCategories()
          AppCategory.fetchingData()
-    
         collectionView?.backgroundColor = .white
         collectionView?.register(CategoryCell.self, forCellWithReuseIdentifier: cellID)
         
         categories = AppCategory.sampleAppCategories()
+        
         
     }
     
