@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "76259B10C2ED7B6660B9C5B2899A33313CE26851",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "76259B10C2ED7B6660B9C5B2899A33313CE26851" : 9223372036854775807,
+    "DE91277A4FBF6BE18E1E94C683C95E6F0809DFB5" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "F9971231-5D00-4963-B677-4445B7004936",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "76259B10C2ED7B6660B9C5B2899A33313CE26851" : "LBTAAPPS\/",
+    "DE91277A4FBF6BE18E1E94C683C95E6F0809DFB5" : "Desktop\/appstore\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "AppstoreDemoLBTA",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "AppstoreDemoLBTA\/AppstoreDemoLBTA.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/224dev\/LBTAAPPS.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "76259B10C2ED7B6660B9C5B2899A33313CE26851"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:purelyswift\/appstore.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "DE91277A4FBF6BE18E1E94C683C95E6F0809DFB5"
+    }
+  ]
+}

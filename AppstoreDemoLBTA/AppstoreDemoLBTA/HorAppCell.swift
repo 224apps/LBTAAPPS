@@ -9,13 +9,11 @@
 import UIKit
 
 class HorAppCell: UICollectionViewCell{
-    
     var app: App? {
         didSet{
             if let name = app?.name{
                 nameLabel.text = name
             }
-            
             categoryLabel.text = app?.category
             if let  price = app?.price {
                 priceLabel.text = "$\(price)"
@@ -31,7 +29,6 @@ class HorAppCell: UICollectionViewCell{
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         setUpViews()
     }
     
@@ -41,15 +38,13 @@ class HorAppCell: UICollectionViewCell{
     
     let imageView :UIImageView = {
         let iv = UIImageView()
-        iv.image = #imageLiteral(resourceName: "facebook")
         iv.contentMode = .scaleAspectFit
         iv.layer.cornerRadius = 16
         iv.layer.masksToBounds = true
         iv.translatesAutoresizingMaskIntoConstraints = false
         return iv
     }()
-    
-    
+
     let nameLabel: UILabel = {
         let nb = UILabel()
         nb.text = " The Social networking site"
@@ -77,7 +72,6 @@ class HorAppCell: UICollectionViewCell{
         pl.translatesAutoresizingMaskIntoConstraints = false
         return pl
     }()
-    
     
     
     func setUpViews(){
