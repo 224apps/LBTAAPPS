@@ -13,12 +13,16 @@ class HomeViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
        view.backgroundColor = UIColor(red: 61/255, green: 91/255, blue: 151/255, alpha: 1)
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Log Out", style: .plain, target: self, action: Selector(("handleButton")))
+        
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "LOG OUT", style: .plain, target: self, action: #selector(handleLogOut))
+        
+        
     }
     //MARK:- Custom Functions
     
     
-    func handleButton()  {
+    @objc func handleLogOut()  {
         let loginViewController = LoginViewController()
         present(loginViewController, animated: true, completion: nil)
     }
