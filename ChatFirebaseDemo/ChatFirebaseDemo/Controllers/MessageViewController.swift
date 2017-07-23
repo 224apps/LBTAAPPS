@@ -10,7 +10,32 @@ import UIKit
 import FirebaseDatabase
 import FirebaseAuth
 
-class HomeViewController: UITableViewController {
+class MessageViewController: UITableViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .white
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogOut))
+        checkIfUserIsLogged()
+        
+        let nmImage = UIImage(named: "new_message_icon")
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: nmImage, style: .plain, target: self, action: #selector(handleNewMessage))
+        
+    }
+    
+    //MARK:- Custom Functions
+    func checkIfUserIsLogged(){
+            if Auth.auth().currentUser?.uid == nil {
+                perform(#selector(handleLogOut), with: nil, afterDelay: 0)
+            } else {
+                let uid = Auth.auth().currentUser?.uid
+                Database.database().reference().child("users").child(uid!).observe(.value, with: { (snapshot) in
+                    print(snapshot)
+                }, withCancel: nil)   
+        }
+            
+    }
+    
     
     @objc func handleLogOut()  {
         do {
@@ -21,20 +46,14 @@ class HomeViewController: UITableViewController {
         let loginViewController = LoginViewController()
         present(loginViewController, animated: true, completion: nil)
     }
+ //MARk- Handle New Message
     
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = UIColor(red: 61/255, green: 91/255, blue: 151/255, alpha: 1)
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "LOG OUT", style: .plain, target: self, action: #selector(handleLogOut))
+    @objc func handleNewMessage()  {
         
-        if Auth.auth().currentUser?.uid == nil {
-            perform(#selector(handleLogOut), with: nil, afterDelay: 0)
-        }
+         let messageController = NewMessageTableViewController()
+         let navController = UINavigationController(rootViewController: messageController)
+        present( navController, animated: true, completion: nil)
     }
-    //MARK:- Custom Functions
-    
-        
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
