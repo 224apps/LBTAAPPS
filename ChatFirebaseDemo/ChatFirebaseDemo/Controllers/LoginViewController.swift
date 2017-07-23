@@ -29,73 +29,9 @@ class LoginViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitleColor(UIColor.white, for: UIControlState())
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-        
         button.addTarget(self, action: #selector(handleLoginRegister), for: .touchUpInside)
-        
         return button
     }()
-    
-    @objc func handleLoginRegister() {
-        if loginRegisterSegmentedControl.selectedSegmentIndex == 0 {
-            handleLogin()
-        } else {
-            handleRegister()
-        }
-    }
-    
-    func handleLogin() {
-        guard let email = emailTextField.text, let password = passwordTextField.text else {
-            print("Form is not valid")
-            return
-        }
-        
-        Auth.auth().signIn(withEmail: email, password: password, completion: { (user, error) in
-            
-            if let error = error {
-                print(error)
-                return
-            }
-            
-            //successfully logged in our user
-            self.dismiss(animated: true, completion: nil)
-            
-        })
-        
-    }
-    
-    func handleRegister() {
-        guard let email = emailTextField.text, let password = passwordTextField.text, let name = nameTextField.text else {
-            print("Form is not valid")
-            return
-        }
-        
-        Auth.auth().createUser(withEmail: email, password: password, completion: { (user , error) in
-            
-            if let error = error {
-                print(error)
-                return
-            }
-            
-            guard let uid = user?.uid else {
-                return
-            }
-            
-            //successfully authenticated user
-            let ref = Database.database().reference()
-            let usersReference = ref.child("users").child(uid)
-            let values = ["name": name, "email": email]
-            usersReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
-                
-                if let err = err {
-                    print(err)
-                    return
-                }
-                
-                self.dismiss(animated: true, completion: nil)
-            })
-            
-        })
-    }
     
     let nameTextField: UITextField = {
         let tf = UITextField()
@@ -133,13 +69,18 @@ class LoginViewController: UIViewController {
         return tf
     }()
     
-    let profileImageView: UIImageView = {
+    lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "gameofthrones_splash")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
+        imageView.addGestureRecognizer(UIGestureRecognizer(target: self, action: #selector(handleProfileViewChange)))
+        imageView.isUserInteractionEnabled = true
         return imageView
     }()
+    
+    
+   
     
     lazy var loginRegisterSegmentedControl: UISegmentedControl = {
         let sc = UISegmentedControl(items: ["Login", "Register"])
@@ -150,27 +91,7 @@ class LoginViewController: UIViewController {
         return sc
     }()
     
-    @objc func handleLoginRegisterChange() {
-        let title = loginRegisterSegmentedControl.titleForSegment(at: loginRegisterSegmentedControl.selectedSegmentIndex)
-        loginRegisterButton.setTitle(title, for: UIControlState())
-        
-        // change height of inputContainerView, but how???
-        inputsContainerViewHeightAnchor?.constant = loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 100 : 150
-        
-        // change height of nameTextField
-        nameTextFieldHeightAnchor?.isActive = false
-        nameTextFieldHeightAnchor = nameTextField.heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor, multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 0 : 1/3)
-        nameTextFieldHeightAnchor?.isActive = true
-        nameTextField.isHidden = loginRegisterSegmentedControl.selectedSegmentIndex == 0
-        
-        emailTextFieldHeightAnchor?.isActive = false
-        emailTextFieldHeightAnchor = emailTextField.heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor, multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 1/2 : 1/3)
-        emailTextFieldHeightAnchor?.isActive = true
-        
-        passwordTextFieldHeightAnchor?.isActive = false
-        passwordTextFieldHeightAnchor = passwordTextField.heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor, multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 1/2 : 1/3)
-        passwordTextFieldHeightAnchor?.isActive = true
-    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

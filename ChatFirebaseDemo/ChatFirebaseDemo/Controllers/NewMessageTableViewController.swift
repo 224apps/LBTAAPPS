@@ -7,72 +7,74 @@
 //
 
 import UIKit
-import FirebaseAuth
-import FirebaseDatabase
+import Firebase
 
-class NewMessageTableViewController: UITableViewController {
+class NewMessageController: UITableViewController {
     
-    let  cellIdentifier = "CellID"
+    let cellId = "cellId"
     
     var users = [User]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //cancel button on the left
-        
-        self.tableView.register(UserCell.self, forCellReuseIdentifier: cellIdentifier)
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(handleCancel))
         
-        fetchFireBaseUser()
+        tableView.register(UserCell.self, forCellReuseIdentifier: cellId)
+        
+        fetchUser()
     }
     
-    
-    //MARK - Custom Methods
-    
-    func fetchFireBaseUser() {
-        Database.database().reference().child("users").observe(.childAdded, with: { snapshot in
+    func fetchUser() {
+        Database.database().reference().child("users").observe(.childAdded, with: { (snapshot) in
             
-            if let dict = snapshot.value as? [String: AnyObject ]{
-                let user = User(dictionary: dict)
-               // user.setValuesForKeys(dict)
-                 self.users.append(user)
+            if let dictionary = snapshot.value as? [String: AnyObject] {
+                let user = User(dictionary: dictionary)
+                
+                //if you use this setter, your app will crash if your class properties don't exactly match up with the firebase dictionary keys
+                self.users.append(user)
+                
+                //this will crash because of background thread, so lets use dispatch_async to fix
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
                 
+                //                user.name = dictionary["name"]
             }
             
         }, withCancel: nil)
     }
     
     @objc func handleCancel() {
-        dismiss(animated: true) {
-            print("Message View Dismissed")
-        }
-        
-    }
-    
-    // MARK: - Table view data source
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
+        dismiss(animated: true, completion: nil)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return users.count
     }
     
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-         let user = users[indexPath.row]
-         cell.textLabel?.text = user.name
-         cell.detailTextLabel?.text = user.email
+        
+        // let use a hack for now, we actually need to dequeue our cells for memory efficiency
+        //        let cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellId)
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
+        
+        let user = users[indexPath.row]
+        cell.textLabel?.text = user.name
+        cell.detailTextLabel?.text = user.email
+        
         return cell
     }
     
-    
 }
+
+
+
+
+
+
+
+
+
+
