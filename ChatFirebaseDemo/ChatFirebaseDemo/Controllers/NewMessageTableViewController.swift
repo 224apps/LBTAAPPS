@@ -63,8 +63,31 @@ class NewMessageController: UITableViewController {
         let user = users[indexPath.row]
         cell.textLabel?.text = user.name
         cell.detailTextLabel?.text = user.email
+        cell.imageView?.contentMode = .scaleToFill
+        
+        if let profileImageURL = user.profileImageUrl {
+            let url = URL(string: profileImageURL)
+             let session = URLSession.shared
+             let task = session.dataTask(with: url!, completionHandler: { data, response, error in
+                if error != nil {
+                    print( "Error: \(String(describing: error))")
+                    return
+                }
+                DispatchQueue.main.async {
+                    cell.imageView?.image = UIImage(data: data!)
+                }
+                
+            })
+            task.resume()
+            
+            
+        }
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 56
     }
     
 }

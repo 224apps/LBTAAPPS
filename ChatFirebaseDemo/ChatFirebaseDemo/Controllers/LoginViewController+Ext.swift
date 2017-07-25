@@ -11,7 +11,7 @@ import Firebase
 
 extension LoginViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    func handleRegister() {
+ @objc   func handleRegister() {
         guard let email = emailTextField.text, let password = passwordTextField.text, let name = nameTextField.text else {
             print("Form is not valid")
             return
@@ -34,7 +34,7 @@ extension LoginViewController: UIImagePickerControllerDelegate, UINavigationCont
             
             if let uploadData = UIImagePNGRepresentation(self.profileImageView.image!) {
                 
-                storageRef.put(uploadData, metadata: nil, completion: { (metadata, error) in
+                storageRef.putData(uploadData, metadata: nil, completion: { (metadata, error) in
                     
                     if let error = error {
                         print(error)
@@ -67,7 +67,7 @@ extension LoginViewController: UIImagePickerControllerDelegate, UINavigationCont
         })
     }
     
-    func handleSelectProfileImageView() {
+    @objc func handleSelectProfileImageView() {
         let picker = UIImagePickerController()
         
         picker.delegate = self
@@ -75,32 +75,6 @@ extension LoginViewController: UIImagePickerControllerDelegate, UINavigationCont
         
         present(picker, animated: true, completion: nil)
     }
-    
-    
-    
-    @objc func handleLoginRegisterChange() {
-        let title = loginRegisterSegmentedControl.titleForSegment(at: loginRegisterSegmentedControl.selectedSegmentIndex)
-        loginRegisterButton.setTitle(title, for: UIControlState())
-        
-        // change height of inputContainerView, but how???
-        inputsContainerViewHeightAnchor?.constant = loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 100 : 150
-        
-        // change height of nameTextField
-        nameTextFieldHeightAnchor?.isActive = false
-        nameTextFieldHeightAnchor = nameTextField.heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor, multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 0 : 1/3)
-        nameTextFieldHeightAnchor?.isActive = true
-        nameTextField.isHidden = loginRegisterSegmentedControl.selectedSegmentIndex == 0
-        
-        emailTextFieldHeightAnchor?.isActive = false
-        emailTextFieldHeightAnchor = emailTextField.heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor, multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 1/2 : 1/3)
-        emailTextFieldHeightAnchor?.isActive = true
-        
-        passwordTextFieldHeightAnchor?.isActive = false
-        passwordTextFieldHeightAnchor = passwordTextField.heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor, multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 1/2 : 1/3)
-        passwordTextFieldHeightAnchor?.isActive = true
-    }
-    
-    //MARK- PickerView Delegates
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
@@ -127,3 +101,4 @@ extension LoginViewController: UIImagePickerControllerDelegate, UINavigationCont
     }
     
 }
+
