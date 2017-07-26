@@ -9,9 +9,6 @@
 import UIKit
 import Firebase
 
-import UIKit
-import Firebase
-
 extension LoginViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @objc func handleLoginRegister() {
@@ -26,23 +23,19 @@ extension LoginViewController: UIImagePickerControllerDelegate, UINavigationCont
             print("Form is not valid")
             return
         }
-        
         Auth.auth().signIn(withEmail: email, password: password, completion: { (user, error) in
             
             if let error = error {
                 print(error)
                 return
             }
-             self.messageController?.fetchUserAndFixNavBar()
-            
+            self.messageController?.fetchUserAndSetupNavBarTitle()
             //successfully logged in our user
             self.dismiss(animated: true, completion: nil)
-            
-            
         })
         
     }
-  @objc  func handleRegister() {
+    @objc  func handleRegister() {
         guard let email = emailTextField.text, let password = passwordTextField.text, let name = nameTextField.text else {
             print("Form is not valid")
             return
@@ -77,12 +70,11 @@ extension LoginViewController: UIImagePickerControllerDelegate, UINavigationCont
                     if let profileImageUrl = metadata?.downloadURL()?.absoluteString {
                         
                         let values = ["name": name, "email": email, "profileImageUrl": profileImageUrl]
-                        
                         self.registerUserIntoDatabaseWithUID(uid, values: values as [String : AnyObject])
                     }
                 })
             }
-                
+            
         })
     }
     
@@ -96,11 +88,11 @@ extension LoginViewController: UIImagePickerControllerDelegate, UINavigationCont
                 print(err)
                 return
             }
-             //self.messageController?.fetchUserAndFixNavBar()
-//            self.messageController?.navigationItem.title = values["name"] as? String
+            //self.messageController?.fetchUserAndFixNavBar()
+            //            self.messageController?.navigationItem.title = values["name"] as? String
             
-             let user = User(dictionary: values)
-             self.messageController?.setUpNavBar(user: user)
+            let user = User(dictionary: values)
+            self.messageController?.setupNavBarWithUser(user)
             self.dismiss(animated: true, completion: nil)
         })
     }
@@ -113,8 +105,6 @@ extension LoginViewController: UIImagePickerControllerDelegate, UINavigationCont
         
         present(picker, animated: true, completion: nil)
     }
-    
-    
     
     @objc func handleLoginRegisterChange() {
         let title = loginRegisterSegmentedControl.titleForSegment(at: loginRegisterSegmentedControl.selectedSegmentIndex)
@@ -139,14 +129,6 @@ extension LoginViewController: UIImagePickerControllerDelegate, UINavigationCont
     }
     
     
-    
-    
-    
-    
-    
-    
-    
-    
     //MARK: - UIImagePickerController Delegates..
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
@@ -159,15 +141,11 @@ extension LoginViewController: UIImagePickerControllerDelegate, UINavigationCont
             
             selectedImageFromPicker = originalImage
         }
-        
         if let selectedImage = selectedImageFromPicker {
             profileImageView.image = selectedImage
         }
-        
         dismiss(animated: true, completion: nil)
-        
     }
-    
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         print("canceled picker")
         dismiss(animated: true, completion: nil)
