@@ -41,5 +41,7 @@
 	</array>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>&quot;We need your authorization to select a profile view</string>
+	<key>FirebaseAppDelegateProxyEnabled</key>
+	<false/>
 </dict>
 </plist>

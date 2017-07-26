@@ -30,16 +30,12 @@ class NewMessageController: UITableViewController {
             
             if let dictionary = snapshot.value as? [String: AnyObject] {
                 let user = User(dictionary: dictionary)
-                
-                //if you use this setter, your app will crash if your class properties don't exactly match up with the firebase dictionary keys
                 self.users.append(user)
                 
                 //this will crash because of background thread, so lets use dispatch_async to fix
-                DispatchQueue.main.async {
+                DispatchQueue.main.async(execute: {
                     self.tableView.reloadData()
-                }
-                
-                //                user.name = dictionary["name"]
+                })
             }
             
         }, withCancel: nil)
@@ -54,50 +50,22 @@ class NewMessageController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        // let use a hack for now, we actually need to dequeue our cells for memory efficiency
-        //        let cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellId)
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! UserCell
         let user = users[indexPath.row]
         cell.textLabel?.text = user.name
         cell.detailTextLabel?.text = user.email
-        cell.imageView?.contentMode = .scaleToFill
         
-        if let profileImageURL = user.profileImageUrl {
-            let url = URL(string: profileImageURL)
-             let session = URLSession.shared
-             let task = session.dataTask(with: url!, completionHandler: { data, response, error in
-                if error != nil {
-                    print( "Error: \(String(describing: error))")
-                    return
-                }
-                DispatchQueue.main.async {
-                    cell.imageView?.image = UIImage(data: data!)
-                }
-                
-            })
-            task.resume()
-            
-            
+        if let profileImageUrl = user.profileImageUrl {
+            cell.profileImageView.loadImageUsingCacheWithUrlString(profileImageUrl)
         }
         
         return cell
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 56
+        return 72
     }
     
 }
-
-
-
-
-
-
-
-
 
 
