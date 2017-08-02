@@ -58,12 +58,14 @@ class NewMessageController: UITableViewController {
         return 72
     }
     
+    
+    
       var aMessageController: MessagesController?
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        dismiss(animated: true) {
-            let user = self.users[indexPath.row]
-            self.aMessageController?.showChatControllerForUser(user:user)
+        dismiss(animated: true) { [weak self] in
+            let user = self?.users[indexPath.row]
+            self?.aMessageController?.showChatControllerForUser(user!)
         }
     }
     

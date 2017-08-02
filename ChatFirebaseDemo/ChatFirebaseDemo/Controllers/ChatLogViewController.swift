@@ -8,185 +8,87 @@
 
 import UIKit
 import Firebase
-class ChatLogViewController: UICollectionViewController , UITextFieldDelegate {
+
+class ChatLogController: UICollectionViewController, UITextFieldDelegate {
     
-    let cellID = "CellId"
     var user: User? {
-        didSet{
+        didSet {
             navigationItem.title = user?.name
         }
     }
     
-    
-    let containerView: UIView = {
-        let cv = UIView()
-        cv.translatesAutoresizingMaskIntoConstraints = false
-        cv.backgroundColor = UIColor.white
-        return cv
-    }()
-    
-    let separatorView: UIView = {
-        let sv = UIView()
-        sv.translatesAutoresizingMaskIntoConstraints = false
-        sv.backgroundColor = UIColor.black
-        return sv
-    }()
-    
-    lazy var messTextField : UITextField = {
-        let mt = UITextField()
-        mt.translatesAutoresizingMaskIntoConstraints = false
-        mt.placeholder = "Enter your text here..."
-        mt.delegate = self
-        return mt
-    }()
-    let messSendButton: UIButton = {
-        let  mb = UIButton(type: UIButtonType.system)
-        mb.setTitle("Send", for: .normal)
-        mb.titleLabel?.textColor = UIColor.blue
-        mb.translatesAutoresizingMaskIntoConstraints = false
-        mb.addTarget(self , action: #selector(handleSend), for: UIControlEvents.touchUpInside)
-        return mb
+    lazy var inputTextField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "Enter message..."
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.delegate = self
+        return textField
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        collectionView?.backgroundColor = .white
-        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellID )
+        
+        collectionView?.backgroundColor = UIColor.white
+        
+        setupInputComponents()
+    }
+    
+    func setupInputComponents() {
+        let containerView = UIView()
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        
         view.addSubview(containerView)
-        containerView.addSubview(separatorView)
-        containerView.addSubview(messTextField)
-        containerView.addSubview(messSendButton)
-        setupContainerView()
-        setupSeparatorView()
-        setupMessTextField()
-        setupMessButton()
         
-        
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    
-    // MARK: - Custom Methods
-    func setupContainerView(){
-        //The container Constraints..
+        //ios9 constraint anchors
+        //x,y,w,h
         containerView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         containerView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         containerView.heightAnchor.constraint(equalToConstant: 50).isActive = true
-    }
-    
-    func setupSeparatorView(){
-        //Let's work on the width of the separator View
-        separatorView.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
-        separatorView.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
-        separatorView.widthAnchor.constraint(equalTo: containerView.widthAnchor).isActive = true
-        separatorView.heightAnchor.constraint(equalToConstant: 1).isActive = true
-    }
-    
-    func setupMessTextField()  {
-        //Let's work on the constraint of the message Text Field
-        messTextField.leftAnchor.constraint(equalTo: containerView.leftAnchor, constant: 8).isActive = true
-        messTextField.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
-        messTextField.rightAnchor.constraint(equalTo: messSendButton.leftAnchor).isActive = true
-        messTextField.heightAnchor.constraint(equalTo: containerView.heightAnchor).isActive = true
         
-    }
-    
-    func setupMessButton(){
-        // Let's work on the constraint of the  button
-        messSendButton.rightAnchor.constraint(equalTo: containerView.rightAnchor).isActive = true
-        messSendButton.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
-        messSendButton.widthAnchor.constraint(equalToConstant: 80).isActive = true
-        messSendButton.heightAnchor.constraint(equalTo: containerView.heightAnchor).isActive = true
-    }
-    
-    
-
-    // MARK: Custom Functions...
-    
-    @objc func handleSend()  {
+        let sendButton = UIButton(type: .system)
+        sendButton.setTitle("Send", for: UIControlState())
+        sendButton.translatesAutoresizingMaskIntoConstraints = false
+        sendButton.addTarget(self, action: #selector(handleSend), for: .touchUpInside)
+        containerView.addSubview(sendButton)
+        //x,y,w,h
+        sendButton.rightAnchor.constraint(equalTo: containerView.rightAnchor).isActive = true
+        sendButton.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
+        sendButton.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        sendButton.heightAnchor.constraint(equalTo: containerView.heightAnchor).isActive = true
         
-        let ref =  Database.database().reference().child("messages")
+        containerView.addSubview(inputTextField)
+        //x,y,w,h
+        inputTextField.leftAnchor.constraint(equalTo: containerView.leftAnchor, constant: 8).isActive = true
+        inputTextField.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
+        inputTextField.rightAnchor.constraint(equalTo: sendButton.leftAnchor).isActive = true
+        inputTextField.heightAnchor.constraint(equalTo: containerView.heightAnchor).isActive = true
+        
+        let separatorLineView = UIView()
+        separatorLineView.backgroundColor = UIColor(r: 220, g: 220, b: 220)
+        separatorLineView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(separatorLineView)
+        //x,y,w,h
+        separatorLineView.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
+        separatorLineView.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
+        separatorLineView.widthAnchor.constraint(equalTo: containerView.widthAnchor).isActive = true
+        separatorLineView.heightAnchor.constraint(equalToConstant: 1).isActive = true
+    }
+    
+    @objc func handleSend() {
+        let ref = Database.database().reference().child("messages")
         let childRef = ref.childByAutoId()
-        let values = ["text":  messTextField.text!,  ]
+        //is it there best thing to include the name inside of the message node
+        let toId = user!.id!
+        let fromId = Auth.auth().currentUser!.uid
+        let timestamp = Int(Date().timeIntervalSince1970)
+        let values = ["text": inputTextField.text!, "toId": toId, "fromId": fromId, "timestamp": timestamp] as [String : Any]
         childRef.updateChildValues(values)
-        
-        
     }
-    
-    // MARK: UICollectionViewDataSource
-    
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return 1
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath)
-        
-        // Configure the cell
-        return cell
-    }
-    
-    
-    // MARK: UITextFieldDelegate
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         handleSend()
-        messTextField.resignFirstResponder()
         return true
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    // MARK: UICollectionViewDelegate
-    
-    /*
-     // Uncomment this method to specify if the specified item should be highlighted during tracking
-     override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-     return true
-     }
-     */
-    
-    /*
-     // Uncomment this method to specify if the specified item should be selected
-     override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-     return true
-     }
-     */
-    
-    /*
-     // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-     override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-     return false
-     }
-     
-     override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-     return false
-     }
-     
-     override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-     
-     }
-     */
 }
+
