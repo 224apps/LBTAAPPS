@@ -11,6 +11,13 @@ import Firebase
 
 class ChatLogController: UICollectionViewController, UITextFieldDelegate {
     
+    let prScrollView : UIScrollView = {
+         let sv = UIScrollView()
+         return sv
+    }()
+    
+    
+    
     var user: User? {
         didSet {
             navigationItem.title = user?.name
@@ -29,9 +36,47 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate {
         super.viewDidLoad()
         
         collectionView?.backgroundColor = UIColor.white
-        
         setupInputComponents()
+        setupscrollViewContent
+        
+        //Let's work on the notification of the keyboard change...
+        NotificationCenter.default.addObserver(self, selector: #selector(KeyboardWillShow(notification:)), name:NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(KeyboardWillHide(notification:)), name:NSNotification.Name.UIKeyboardDidShow, object: nil)
     }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    
+   // Func implement the   content to show when the keyboard is shown...
+    
+    
+     @objc func KeyboardWillShow(notification: NSNotification)  {
+        
+    }
+    
+    @objc func KeyboardWillHide(notification: NSNotification)  {
+        
+    }
+    
+    
+    func adjustContentInsets(show:Bool, notification:NSNotification ){
+        
+        let  userInfo = notification.userInfo ?? [:]
+        
+        let keyboardFrame = (userInfo[UIKeyboardFrameBeginUserInfoKey] as!  NSValue)
+        let adjustmentHeight = ( keyboardFrame.height *(show? 1 : -1 ))
+        
+        
+        prScrollView.contentInset.bottom +=  adjustmentHeight
+        prScrollView.scrollIndicatorInsets.bottom += adjustmentHeight
+        
+    }
+    
+    
+    
+    
     
     func setupInputComponents() {
         let containerView = UIView()
@@ -92,3 +137,9 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate {
     }
 }
 
+
+extension  ChatLogController : UIScrollViewDelegate {
+    
+    
+    
+}

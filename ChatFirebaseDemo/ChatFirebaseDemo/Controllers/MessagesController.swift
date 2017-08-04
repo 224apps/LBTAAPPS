@@ -50,10 +50,6 @@ class MessagesController: UITableViewController {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cellId")
         
         let message = messages[indexPath.row]
-        
-        if let toId = message.toId {
-             let ref = Database.database().reference().child("users").child(toId)
-        }
         cell.textLabel?.text = message.toId
         cell.detailTextLabel?.text = message.text
         
@@ -62,7 +58,7 @@ class MessagesController: UITableViewController {
     
     @objc func handleNewMessage() {
         let newMessageController = NewMessageController()
-        newMessageController.aMessageController = self
+        newMessageController.messagesController = self
         let navController = UINavigationController(rootViewController: newMessageController)
         present(navController, animated: true, completion: nil)
     }
@@ -154,11 +150,12 @@ class MessagesController: UITableViewController {
         }
         
         let loginViewController = LoginViewController()
-        loginViewController.messageController = self
+        loginViewController.messagesController = self
         present(loginViewController, animated: true, completion: nil)
     }
     
 }
+
 
 
 

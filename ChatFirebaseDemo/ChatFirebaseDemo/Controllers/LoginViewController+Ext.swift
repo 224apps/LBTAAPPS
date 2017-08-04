@@ -11,31 +11,7 @@ import Firebase
 
 extension LoginViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    @objc func handleLoginRegister() {
-        if loginRegisterSegmentedControl.selectedSegmentIndex == 0 {
-            handleLogin()
-        } else {
-            handleRegister()
-        }
-    }
-    func handleLogin() {
-        guard let email = emailTextField.text, let password = passwordTextField.text else {
-            print("Form is not valid")
-            return
-        }
-        Auth.auth().signIn(withEmail: email, password: password, completion: { (user, error) in
-            
-            if let error = error {
-                print(error)
-                return
-            }
-            self.messageController?.fetchUserAndSetupNavBarTitle()
-            //successfully logged in our user
-            self.dismiss(animated: true, completion: nil)
-        })
-        
-    }
-    @objc  func handleRegister() {
+    func handleRegister() {
         guard let email = emailTextField.text, let password = passwordTextField.text, let name = nameTextField.text else {
             print("Form is not valid")
             return
@@ -43,8 +19,8 @@ extension LoginViewController: UIImagePickerControllerDelegate, UINavigationCont
         
         Auth.auth().createUser(withEmail: email, password: password, completion: { (user, error) in
             
-            if let error = error {
-                print(error)
+            if error != nil {
+                print(error ?? "")
                 return
             }
             
@@ -56,25 +32,25 @@ extension LoginViewController: UIImagePickerControllerDelegate, UINavigationCont
             let imageName = UUID().uuidString
             let storageRef = Storage.storage().reference().child("profile_images").child("\(imageName).jpg")
             
-            guard let   profileView = self.profileImageView.image else { return }
-            
-            if let uploadData = UIImageJPEGRepresentation(profileView, 0.1){
+            if let profileImage = self.profileImageView.image, let uploadData = UIImageJPEGRepresentation(profileImage, 0.1) {
+                
+                //            if let uploadData = UIImagePNGRepresentation(self.profileImageView.image!) {
                 
                 storageRef.putData(uploadData, metadata: nil, completion: { (metadata, error) in
                     
-                    if let error = error {
-                        print(error)
+                    if error != nil {
+                        print(error ?? "")
                         return
                     }
                     
                     if let profileImageUrl = metadata?.downloadURL()?.absoluteString {
                         
                         let values = ["name": name, "email": email, "profileImageUrl": profileImageUrl]
+                        
                         self.registerUserIntoDatabaseWithUID(uid, values: values as [String : AnyObject])
                     }
                 })
             }
-            
         })
     }
     
@@ -84,20 +60,21 @@ extension LoginViewController: UIImagePickerControllerDelegate, UINavigationCont
         
         usersReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
             
-            if let err = err {
-                print(err)
+            if err != nil {
+                print(err ?? "")
                 return
             }
-            //self.messageController?.fetchUserAndFixNavBar()
-            //            self.messageController?.navigationItem.title = values["name"] as? String
             
+            //            self.messagesController?.fetchUserAndSetupNavBarTitle()
+            //            self.messagesController?.navigationItem.title = values["name"] as? String
             let user = User(dictionary: values)
-            self.messageController?.setupNavBarWithUser(user)
+            self.messagesController?.setupNavBarWithUser(user)
+            
             self.dismiss(animated: true, completion: nil)
         })
     }
     
-    @objc func handleSelectProfileImageView() {
+     @objc func handleSelectProfileImageView() {
         let picker = UIImagePickerController()
         
         picker.delegate = self
@@ -105,31 +82,6 @@ extension LoginViewController: UIImagePickerControllerDelegate, UINavigationCont
         
         present(picker, animated: true, completion: nil)
     }
-    
-    @objc func handleLoginRegisterChange() {
-        let title = loginRegisterSegmentedControl.titleForSegment(at: loginRegisterSegmentedControl.selectedSegmentIndex)
-        loginRegisterButton.setTitle(title, for: UIControlState())
-        
-        // change height of inputContainerView, but how???
-        inputsContainerViewHeightAnchor?.constant = loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 100 : 150
-        
-        // change height of nameTextField
-        nameTextFieldHeightAnchor?.isActive = false
-        nameTextFieldHeightAnchor = nameTextField.heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor, multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 0 : 1/3)
-        nameTextFieldHeightAnchor?.isActive = true
-        nameTextField.isHidden = loginRegisterSegmentedControl.selectedSegmentIndex == 0
-        
-        emailTextFieldHeightAnchor?.isActive = false
-        emailTextFieldHeightAnchor = emailTextField.heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor, multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 1/2 : 1/3)
-        emailTextFieldHeightAnchor?.isActive = true
-        
-        passwordTextFieldHeightAnchor?.isActive = false
-        passwordTextFieldHeightAnchor = passwordTextField.heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor, multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 1/2 : 1/3)
-        passwordTextFieldHeightAnchor?.isActive = true
-    }
-    
-    
-    //MARK: - UIImagePickerController Delegates..
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
@@ -141,11 +93,15 @@ extension LoginViewController: UIImagePickerControllerDelegate, UINavigationCont
             
             selectedImageFromPicker = originalImage
         }
+        
         if let selectedImage = selectedImageFromPicker {
             profileImageView.image = selectedImage
         }
+        
         dismiss(animated: true, completion: nil)
+        
     }
+    
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         print("canceled picker")
         dismiss(animated: true, completion: nil)
