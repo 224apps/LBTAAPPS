@@ -33,11 +33,6 @@ class WordViewCell: UICollectionViewCell {
         
          wordLabel.anchor(self.topAnchor, left: self.leftAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0  )
     
-//        wordLabel.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-//        wordLabel.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
-//        wordLabel.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
-//        wordLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-    
     }
     
     required init?(coder aDecoder: NSCoder) {

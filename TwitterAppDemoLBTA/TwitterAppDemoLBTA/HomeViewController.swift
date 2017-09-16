@@ -16,22 +16,24 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
       let cellID = "cellId"
       let headerID = "headerId"
       let footerID = "footerId"
+    
+    
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        collectionViewLayout.invalidateLayout()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
          collectionView?.backgroundColor = .white
-        
          collectionView?.register( WordViewCell.self, forCellWithReuseIdentifier: cellID)
         
          collectionView?.register(UICollectionViewCell.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerID)
         
          collectionView?.register(UICollectionViewCell.self, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: footerID)
         
-        
-        
-         let center  = 
+
         
         
     }

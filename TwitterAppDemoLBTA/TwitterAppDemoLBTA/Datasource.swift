@@ -26,7 +26,14 @@ class DataSource: Datasource {
     }()
     
     
-     let tweets = ["Tweet 1", "Tweet 2", "Tweet 3"]
+    let tweets: [Tweet] = {
+         let aUser = User(name: "Abdoul", username:"@224Dev", bioText: "I am an iOS Developer", profileImage: #imageLiteral(resourceName: "abdoulaye"))
+        
+        let tweet = Tweet(user: aUser, message: "Here are the ten African Countries With The Most Beautiful Women, 54 nations over 1 billion people, but who harbors the most gorgeous girls.Here are the ten African Countries With The Most Beautiful Women, 54 nations over 1 billion people, but who harbors the most gorgeous girls.")
+         let tweet1 = Tweet(user: aUser, message: "This is a second  tweet that will be used in the tweeter table view that  we are created earlier.")
+        
+        return [ tweet, tweet1]
+    }()
     
     override func footerClasses() -> [DatasourceCell.Type]? {
         return [ UserFooter.self]
@@ -45,13 +52,16 @@ class DataSource: Datasource {
         if section == 1{
             return 1
         }
-        
         return users.count
     }
     override func numberOfSections() -> Int {
         return 2
     }
     override func item(_ indexPath: IndexPath) -> Any? {
+        
+        if indexPath.section == 1 {
+             return tweets[indexPath.item]
+        }
         return users[indexPath.item]
     }
     

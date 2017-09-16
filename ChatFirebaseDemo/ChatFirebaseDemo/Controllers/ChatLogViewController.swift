@@ -37,7 +37,8 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate {
         
         collectionView?.backgroundColor = UIColor.white
         setupInputComponents()
-        setupscrollViewContent
+        prScrollView.frame = view.frame
+        prScrollView.addSubview(view)
         
         //Let's work on the notification of the keyboard change...
         NotificationCenter.default.addObserver(self, selector: #selector(KeyboardWillShow(notification:)), name:NSNotification.Name.UIKeyboardWillShow, object: nil)
@@ -53,11 +54,12 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate {
     
     
      @objc func KeyboardWillShow(notification: NSNotification)  {
+        adjustContentInsets(show: true, notification: notification)
         
     }
     
     @objc func KeyboardWillHide(notification: NSNotification)  {
-        
+        adjustContentInsets(show: false, notification: notification)
     }
     
     
@@ -65,9 +67,9 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate {
         
         let  userInfo = notification.userInfo ?? [:]
         
-        let keyboardFrame = (userInfo[UIKeyboardFrameBeginUserInfoKey] as!  NSValue)
-        let adjustmentHeight = ( keyboardFrame.height *(show? 1 : -1 ))
+        let keyboardFrame = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
         
+        let adjustmentHeight = ( keyboardFrame.height * (show ? 1 : -1 )) + 20
         
         prScrollView.contentInset.bottom +=  adjustmentHeight
         prScrollView.scrollIndicatorInsets.bottom += adjustmentHeight
@@ -138,8 +140,3 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate {
 }
 
 
-extension  ChatLogController : UIScrollViewDelegate {
-    
-    
-    
-}
