@@ -11,6 +11,16 @@ import LBTAComponents
 import SwiftyJSON
 import TRON
 
+
+
+
+extension Collection where  Iterator.Element == JSON {
+    func decode<T:JSONDecodable>()  throws-> [T] {
+        
+         return  try map{ try T(json: $0)}
+    }
+}
+
 class DataSource: Datasource , JSONDecodable {
     
     let users: [User]
@@ -18,11 +28,11 @@ class DataSource: Datasource , JSONDecodable {
     
     required init(json: JSON) throws {
         
-        let userJSONArray = json["users"].array
-        self.users = userJSONArray!.map{ return User(json: $0) }
-        let tweetJSONArray = json["tweets"].array
-        self.tweets = tweetJSONArray!.map{ return Tweet(json:$0)}
-        
+        guard let userJSONArray = json["users"].array, let tweetJSONArray = json["tweets"].array else {
+            throw NSError(domain: "com.224apps.com", code: 1, userInfo: [NSLocalizedDescriptionKey:"users not valid in JSON"])
+        }
+         self.users =   try userJSONArray.decode()
+         self.tweets =   try tweetJSONArray.decode()
     }
 
 

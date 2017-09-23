@@ -62,7 +62,7 @@ class UserCell: DatasourceCell {
              nameLabel.text = user.name
              usernameLabel.text = user.username
              bioTextView.text =  user.bioText
-             profileImageView.image = user.profileImage
+             profileImageView.loadImage(urlString: user.profileImageURL)
         }
     }
             
@@ -81,14 +81,13 @@ class UserCell: DatasourceCell {
         return nl
     }()
     
-    let profileImageView: UIImageView = {
-         let pri = UIImageView()
+    let profileImageView: CachedImageView = {
+         let pri = CachedImageView()
          pri.image =  #imageLiteral(resourceName: "abdoulaye")
          pri.layer.cornerRadius = 5
          pri.layer.masksToBounds = true
          pri.backgroundColor = .red
          return pri
-        
     }()
     
     let usernameLabel: UILabel = {
