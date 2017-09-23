@@ -8,11 +8,11 @@
 
 import UIKit
 import Foundation
+import SwiftyJSON
+import TRON
 
 
 class HomeViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
-    
-    
       let cellID = "cellId"
       let headerID = "headerId"
       let footerID = "footerId"
@@ -33,9 +33,6 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
         
          collectionView?.register(UICollectionViewCell.self, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: footerID)
         
-
-        
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -47,7 +44,6 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
     
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        
         return 1
     }
     
@@ -55,9 +51,6 @@ class HomeViewController: UICollectionViewController, UICollectionViewDelegateFl
         
         return 1
     }
-    
-    
-    
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         

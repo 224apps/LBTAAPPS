@@ -1,6 +1,6 @@
 
 
-#platform :ios '9.0'
+#platform :ios, '9.0'
 
 target  'TwitterAppDemoLBTA' do
 
@@ -9,5 +9,6 @@ target  'TwitterAppDemoLBTA' do
 #pods for TwitterAppDemoLBTA
 
 pod 'LBTAComponents', '~> 0.1.9'
-
+pod 'SwiftyJSON'
+pod 'TRON', '~> 2.0.0'
 end

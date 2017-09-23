@@ -8,33 +8,24 @@
 
 import UIKit
 import LBTAComponents
+import SwiftyJSON
+import TRON
+
+class DataSource: Datasource , JSONDecodable {
+    
+    let users: [User]
+     var tweets = [Tweet]()
+    
+    required init(json: JSON) throws {
+        
+        let userJSONArray = json["users"].array
+        self.users = userJSONArray!.map{ return User(json: $0) }
+        let tweetJSONArray = json["tweets"].array
+        self.tweets = tweetJSONArray!.map{ return Tweet(json:$0)}
+        
+    }
 
 
-class DataSource: Datasource {
-    
-    
-    let users:[User] = {
-        
-        let abdoulaye =  User(name:"Abdoulaye", username: "@abdoul", bioText: "This is the bio of abdoulaye.Abdoulaye is on his way to become a senior developer in  both ioS and Android.", profileImage: #imageLiteral(resourceName: "abdoulaye") )
-        
-        let raywenderlich = User(name: "Ray Wenderlich", username: "@raywenderlich", bioText: " This is the bio of abdoulaye.Abdoulaye is on his way to become a senior developer in  both ioS and Android.", profileImage: #imageLiteral(resourceName: "raywenderlich"))
-        let lensafrica = User(name: "LensAfrica", username: "@Lensafrica", bioText: "Here are the ten African Countries With The Most Beautiful Women, 54 nations over 1 billion people, but who harbors the most gorgeous girls.Here are the ten African Countries With The Most Beautiful Women, 54 nations over 1 billion people, but who harbors the most gorgeous girls.Here are the ten African Countries With The Most Beautiful Women, 54 nations over 1 billion people, but who harbors the most gorgeous girls.Here are the ten African Countries With The Most Beautiful Women, 54 nations over 1 billion people, but who harbors the most gorgeous girls.Here are the ten African Countries With The Most Beautiful Women, 54 nations over 1 billion people, but who harbors the most gorgeous girls.", profileImage: #imageLiteral(resourceName: "beauty"))
-         return [ abdoulaye, raywenderlich, lensafrica]
-        
-        
-        
-    }()
-    
-    
-    let tweets: [Tweet] = {
-         let aUser = User(name: "Abdoul", username:"@224Dev", bioText: "I am an iOS Developer", profileImage: #imageLiteral(resourceName: "abdoulaye"))
-        
-        let tweet = Tweet(user: aUser, message: "Here are the ten African Countries With The Most Beautiful Women, 54 nations over 1 billion people, but who harbors the most gorgeous girls.Here are the ten African Countries With The Most Beautiful Women, 54 nations over 1 billion people, but who harbors the most gorgeous girls.")
-         let tweet1 = Tweet(user: aUser, message: "This is a second  tweet that will be used in the tweeter table view that  we are created earlier.")
-        
-        return [ tweet, tweet1]
-    }()
-    
     override func footerClasses() -> [DatasourceCell.Type]? {
         return [ UserFooter.self]
     }

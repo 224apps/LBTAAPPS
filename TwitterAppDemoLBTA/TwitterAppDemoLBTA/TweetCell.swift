@@ -16,7 +16,7 @@ class TweetCell: DatasourceCell {
         didSet{
             guard let tweet = datasourceItem as? Tweet else { return }
             
-            let attributedText = NSMutableAttributedString(string: tweet.user.name, attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 16)])
+            let attributedText = NSMutableAttributedString(string: tweet.user.name, attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 16)])
             
             let username = "  \(tweet.user.username) \n "
             
@@ -24,12 +24,12 @@ class TweetCell: DatasourceCell {
             paragraphStyle.lineSpacing = 4.0
             let range = NSMakeRange(0, attributedText.string.characters.count)
             
-            attributedText.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: range)
+            attributedText.addAttribute(NSAttributedStringKey.paragraphStyle, value: paragraphStyle, range: range)
             
             
-            attributedText.append(NSAttributedString(string: username, attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 15), NSForegroundColorAttributeName: UIColor.gray]))
+            attributedText.append(NSAttributedString(string: username, attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 15), NSAttributedStringKey.foregroundColor: UIColor.gray]))
             
-            attributedText.append(NSAttributedString(string: tweet.message, attributes: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 15), NSForegroundColorAttributeName: UIColor.black]))
+            attributedText.append(NSAttributedString(string: tweet.message, attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 15), NSAttributedStringKey.foregroundColor: UIColor.black]))
             
             messageTextView.attributedText = attributedText
             

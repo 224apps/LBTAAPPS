@@ -8,19 +8,57 @@
 
 
 import LBTAComponents
+import TRON
+import SwiftyJSON
 
 class DataSourceController: DatasourceController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let datasource = DataSource()
-        self.datasource = datasource
-        
         collectionView?.backgroundColor = UIColor(r: 232, g: 236, b: 241)
         setUpNavigationBarItems()
         
         
+       Service.sharedInstance.fetchHomeFeed { (datasource) in
+        self.datasource = datasource
+        }
     }
+
+    class JSONError: JSONDecodable {
+        required init(json: JSON) throws {
+            print("JSON ERROR")
+        }
+    }
+    
+  
+
+    
+    
+   
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     private func setUpNavigationBarItems(){
@@ -37,7 +75,7 @@ class DataSourceController: DatasourceController {
         if   let  user = self.datasource?.item(indexPath) as? User{
             let width =  view.frame.width - 12 - 50 - 12 - 2
             let sizeframe = CGSize(width: width, height: 1000)
-            let attributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 16)]
+            let attributes = [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16)]
             let estimatedFrame = NSString(string: user.bioText).boundingRect(with: sizeframe, options: .usesLineFragmentOrigin, attributes: attributes, context: nil)
             
             return CGSize(width: view.frame.width, height: estimatedFrame.height + 66)

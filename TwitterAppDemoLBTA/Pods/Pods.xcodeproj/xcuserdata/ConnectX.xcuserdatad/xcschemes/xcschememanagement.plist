@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Alamofire.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>LBTAComponents.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -14,15 +19,40 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SwiftyJSON.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>TRON.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>812EE6C5B2BBAA9B8A431993573192B1</key>
+		<key>1A196107BC8DB338FC11C9CE9510573C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C640DAB9D418AF636D360813F1394C71</key>
+		<key>88E9EC28B8B46C3631E6B242B50F4442</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>99008BE0CD9DAE759B55B71485BE3CD4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D7F0752A843D43DB883AFECE389D8BED</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DA1C4DD91CAE94073DA287AD4A568551</key>
 		<dict>
 			<key>primary</key>
 			<true/>
