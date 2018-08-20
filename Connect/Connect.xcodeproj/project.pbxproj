@@ -13,6 +13,8 @@
 		49E846FF1FCB0633007739AC /* Connect.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 49E846FD1FCB0633007739AC /* Connect.xcdatamodeld */; };
 		49E847011FCB0633007739AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49E847001FCB0633007739AC /* Assets.xcassets */; };
 		49E847041FCB0633007739AC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49E847021FCB0633007739AC /* LaunchScreen.storyboard */; };
+		49E8470C1FCB24F2007739AC /* ExpandableNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E8470B1FCB24F2007739AC /* ExpandableNames.swift */; };
+		49E8470E1FCB308E007739AC /* ContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E8470D1FCB308E007739AC /* ContactCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		49E847001FCB0633007739AC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		49E847031FCB0633007739AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		49E847051FCB0633007739AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		49E8470B1FCB24F2007739AC /* ExpandableNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableNames.swift; sourceTree = "<group>"; };
+		49E8470D1FCB308E007739AC /* ContactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +67,8 @@
 				49E847021FCB0633007739AC /* LaunchScreen.storyboard */,
 				49E847051FCB0633007739AC /* Info.plist */,
 				49E846FD1FCB0633007739AC /* Connect.xcdatamodeld */,
+				49E8470B1FCB24F2007739AC /* ExpandableNames.swift */,
+				49E8470D1FCB308E007739AC /* ContactCell.swift */,
 			);
 			path = Connect;
 			sourceTree = "<group>";
@@ -139,6 +145,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49E8470E1FCB308E007739AC /* ContactCell.swift in Sources */,
+				49E8470C1FCB24F2007739AC /* ExpandableNames.swift in Sources */,
 				49E846F91FCB0633007739AC /* ViewController.swift in Sources */,
 				49E846F71FCB0633007739AC /* AppDelegate.swift in Sources */,
 				49E846FF1FCB0633007739AC /* Connect.xcdatamodeld in Sources */,
