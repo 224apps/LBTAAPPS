@@ -45,7 +45,7 @@ class ChatMessageCell: UITableViewCell {
         //Let's work on the autolayout of the messageLabel
         
         NSLayoutConstraint.activate(
-            [messageLabel.topAnchor.constraint(equalTo: topAnchor, constant: 32),
+            [messageLabel.topAnchor.constraint(equalTo: topAnchor, constant: 16),
              messageLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -32),
              messageLabel.widthAnchor.constraint(lessThanOrEqualToConstant: 250),
              bubleBackgroundView.topAnchor.constraint(equalTo: messageLabel.topAnchor, constant: -16),
