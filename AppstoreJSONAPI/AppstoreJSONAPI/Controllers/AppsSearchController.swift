@@ -7,10 +7,26 @@
 //
 
 import UIKit
+import SDWebImage
 
 private let CellID = "CellID"
 
 class AppsSearchController: UICollectionViewController, UICollectionViewDelegateFlowLayout{
+    
+    fileprivate var appResults =  [Result]()
+    var timer: Timer?
+    fileprivate let searchController  = UISearchController(searchResultsController: nil)
+    
+    fileprivate let enterSearchTermLabel: UILabel = {
+         let label = UILabel()
+        label.text =  " Please enter your search term above."
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.textAlignment = .center
+         return label
+    }()
+    
+    
+    
     
     init() {
         super.init(collectionViewLayout: UICollectionViewFlowLayout())
@@ -26,55 +42,69 @@ class AppsSearchController: UICollectionViewController, UICollectionViewDelegate
         self.collectionView!.register(SearchResultCell.self, forCellWithReuseIdentifier: CellID)
         // Do any additional setup after loading the view.
         collectionView.backgroundColor = .white
-        
-        fetchItunesApps()
+       // fetchItunesApps()
+        collectionView.addSubview(enterSearchTermLabel)
+        enterSearchTermLabel.fillSuperview(padding: .init(top: 100, left: 50, bottom: 0, right: 0))
+        setupSearBar()
     }
-    
-    
-    
     //MARK: - Custom functions.
-    
-    fileprivate func fetchItunesApps() {
-        
-        let urlString = "https://itunes.apple.com/search?term=instagram&entity=software"
-        guard let url = URL(string: urlString) else { return }
-        
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if let error = error {
-                print("Couldn't fetch the data from the API", error)
-                return
-            }
-            guard let data = data else { return }
-            do{
-                let searchResult = try JSONDecoder().decode(SearchResult.self, from: data)
-                searchResult.results.forEach{ print($0)}
-            } catch let jsonError {
-                print(jsonError)
-            }
-        }
-        
-        task.resume()
-        
-        
-        
-        
+    fileprivate func setupSearBar() {
+        definesPresentationContext = true
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchBar.delegate = self
     }
+//    fileprivate func fetchItunesApps() {
+//
+//        Service.shared.fetchApps(searchTerm: "Twitter") { (results, error) in
+//
+//            if let error = error {
+//                print("Failed to fetch apps. \(error)")
+//            }
+//
+//            self.appResults = results
+//            DispatchQueue.main.async {
+//                self.collectionView.reloadData()
+//            }
+//        }
+//    }
     
     //MARK: - CollectionView Datasource and  Delegates
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellID, for: indexPath) as! SearchResultCell
-        
-        cell.nameLabel.text = " Here is my app name"
+        cell.app = appResults[indexPath.item]
         return cell
     }
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        
+        enterSearchTermLabel.isHidden = appResults.count != 0
+        return appResults.count
     }
     
     //MAR: UICollectionView Delegate FlowLayout
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: self.view.frame.width, height: 350)
+    }
+    
+}
+
+//MARK: - SearchBar Delegates
+
+extension AppsSearchController: UISearchBarDelegate {
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { (_) in
+            
+            Service.shared.fetchApps(searchTerm: searchText) { (results, err) in
+                self.appResults = results
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
+            }
+        }
     }
     
 }
