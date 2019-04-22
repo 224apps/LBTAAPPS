@@ -52,8 +52,6 @@ class AppsPageController: BaseListController, UICollectionViewDelegateFlowLayout
         
         var group1: AppGroup?
         var group2: AppGroup?
-       // var group3: AppGroup?
-        //var group4: AppGroup?
         
         // help you sync your data fetches together
         let dispatchGroup = DispatchGroup()
@@ -71,21 +69,6 @@ class AppsPageController: BaseListController, UICollectionViewDelegateFlowLayout
             dispatchGroup.leave()
             group2 = appGroup
         }
-        
-//        dispatchGroup.enter()
-//        Service.shared.fetchTopFree{ (appGroup, err) in
-//            // you should check the err
-//            print("Done with top free apps")
-//            dispatchGroup.leave()
-//            group3 =  appGroup
-//        }
-//        dispatchGroup.enter()
-//        Service.shared.fetchTopPaid{ (appGroup, err) in
-//            print("Done with top paid")
-//            dispatchGroup.leave()
-//            group4 = appGroup
-//        }
-        
         dispatchGroup.enter()
         Service.shared.fetchSocialApps { (apps, err) in
             // you should check the err

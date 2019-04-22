@@ -33,6 +33,8 @@
 		0EDF1E26226E2C29007E0830 /* FeedResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDF1E25226E2C29007E0830 /* FeedResult.swift */; };
 		0EDF1E28226E2CCC007E0830 /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDF1E27226E2CCC007E0830 /* AppGroup.swift */; };
 		0EDF1E2A226E55DC007E0830 /* SocialApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDF1E29226E55DC007E0830 /* SocialApp.swift */; };
+		0EDF1E2C226E812E007E0830 /* HorizontalSnappingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDF1E2B226E812E007E0830 /* HorizontalSnappingController.swift */; };
+		0EDF1E30226E86E9007E0830 /* BetterSnappingLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDF1E2F226E86E9007E0830 /* BetterSnappingLayout.swift */; };
 		528B7BF423BA31EF879E227B /* Pods_AppstoreJSONAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C9D263DC8E9D81DFEE49B7F /* Pods_AppstoreJSONAPI.framework */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +67,8 @@
 		0EDF1E25226E2C29007E0830 /* FeedResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedResult.swift; sourceTree = "<group>"; };
 		0EDF1E27226E2CCC007E0830 /* AppGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGroup.swift; sourceTree = "<group>"; };
 		0EDF1E29226E55DC007E0830 /* SocialApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialApp.swift; sourceTree = "<group>"; };
+		0EDF1E2B226E812E007E0830 /* HorizontalSnappingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalSnappingController.swift; sourceTree = "<group>"; };
+		0EDF1E2F226E86E9007E0830 /* BetterSnappingLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetterSnappingLayout.swift; sourceTree = "<group>"; };
 		3C9D263DC8E9D81DFEE49B7F /* Pods_AppstoreJSONAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppstoreJSONAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E95A8B96581717552394227 /* Pods-AppstoreJSONAPI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppstoreJSONAPI.release.xcconfig"; path = "Target Support Files/Pods-AppstoreJSONAPI/Pods-AppstoreJSONAPI.release.xcconfig"; sourceTree = "<group>"; };
 		C9A9508243EC6D3403378DDC /* Pods-AppstoreJSONAPI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppstoreJSONAPI.debug.xcconfig"; path = "Target Support Files/Pods-AppstoreJSONAPI/Pods-AppstoreJSONAPI.debug.xcconfig"; sourceTree = "<group>"; };
@@ -143,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				0EC9FC3F226B7F5D004A0DD8 /* VerticalStackView.swift */,
+				0EDF1E2F226E86E9007E0830 /* BetterSnappingLayout.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -196,6 +201,7 @@
 		0EC9FC52226C4DBB004A0DD8 /* BaseController */ = {
 			isa = PBXGroup;
 			children = (
+				0EDF1E2B226E812E007E0830 /* HorizontalSnappingController.swift */,
 				0EC9FC34226A82D8004A0DD8 /* BaseTabBarController.swift */,
 				0EC9FC50226C4CF8004A0DD8 /* BaseListController.swift */,
 			);
@@ -376,6 +382,7 @@
 				0EC9FC23226A824C004A0DD8 /* AppDelegate.swift in Sources */,
 				0EC9FC5D226C5FFB004A0DD8 /* AppRowCell.swift in Sources */,
 				0EC9FC43226B9182004A0DD8 /* SearchResult.swift in Sources */,
+				0EDF1E30226E86E9007E0830 /* BetterSnappingLayout.swift in Sources */,
 				0EC9FC5B226C5466004A0DD8 /* AppsHorizontalController.swift in Sources */,
 				0EC9FC3E226B78C4004A0DD8 /* UIView+Layout.swift in Sources */,
 				0EC9FC55226C4F53004A0DD8 /* AppsGroupCell.swift in Sources */,
@@ -390,6 +397,7 @@
 				0EC9FC51226C4CF8004A0DD8 /* BaseListController.swift in Sources */,
 				0EC9FC40226B7F5D004A0DD8 /* VerticalStackView.swift in Sources */,
 				0EC9FC58226C5169004A0DD8 /* Extensions.swift in Sources */,
+				0EDF1E2C226E812E007E0830 /* HorizontalSnappingController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

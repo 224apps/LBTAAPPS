@@ -9,14 +9,13 @@
 import UIKit
 import SDWebImage
 
-class AppsHorizontalController: BaseListController {
+class AppsHorizontalController: HorizontalSnappingController {
     
     fileprivate let CellID = "CellID"
     
     let topBottomPadding : CGFloat = 12
     let lineSpacing: CGFloat =  10
     let leftRightPadding: CGFloat = 16
-    
     var appGroup : AppGroup?
     
     override func viewDidLoad() {
@@ -24,12 +23,8 @@ class AppsHorizontalController: BaseListController {
         // Register cell classes
         self.collectionView!.register(AppRowCell.self, forCellWithReuseIdentifier: CellID)
         // Do any additional setup after loading the view.
-        collectionView.isPagingEnabled = true
         collectionView.backgroundColor = .white
-        
-        if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.scrollDirection = .horizontal
-        }
+        collectionView.contentInset =  .init(top: 0, left: 16, bottom: 0 , right: 16)
     }
 }
 
@@ -59,9 +54,5 @@ extension AppsHorizontalController : UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return lineSpacing
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: topBottomPadding, left: leftRightPadding, bottom: topBottomPadding, right: leftRightPadding)
     }
 }
