@@ -45,21 +45,6 @@ class SearchViewController: BaseListController, UICollectionViewDelegateFlowLayo
         searchController.dimsBackgroundDuringPresentation = false
         searchController.searchBar.delegate = self
     }
-//    fileprivate func fetchItunesApps() {
-//
-//        Service.shared.fetchApps(searchTerm: "Twitter") { (results, error) in
-//
-//            if let error = error {
-//                print("Failed to fetch apps. \(error)")
-//            }
-//
-//            self.appResults = results
-//            DispatchQueue.main.async {
-//                self.collectionView.reloadData()
-//            }
-//        }
-//    }
-    
     //MARK: - CollectionView Datasource and  Delegates
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellID, for: indexPath) as! SearchResultCell
@@ -88,8 +73,8 @@ extension SearchViewController: UISearchBarDelegate {
         timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { (_) in
             
-            Service.shared.fetchApps(searchTerm: searchText) { (results, err) in
-                self.appResults = results
+            Service.shared.fetchApps(searchTerm: searchText) { (res, err) in
+                self.appResults = res?.results ?? []
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
                 }

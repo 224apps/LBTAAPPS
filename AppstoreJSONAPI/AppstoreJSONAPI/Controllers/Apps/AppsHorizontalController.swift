@@ -7,8 +7,7 @@
 //
 
 import UIKit
-
-
+import SDWebImage
 
 class AppsHorizontalController: BaseListController {
     
@@ -17,6 +16,8 @@ class AppsHorizontalController: BaseListController {
     let topBottomPadding : CGFloat = 12
     let lineSpacing: CGFloat =  10
     let leftRightPadding: CGFloat = 16
+    
+    var appGroup : AppGroup?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +28,7 @@ class AppsHorizontalController: BaseListController {
         collectionView.backgroundColor = .white
         
         if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
-             layout.scrollDirection = .horizontal
+            layout.scrollDirection = .horizontal
         }
     }
 }
@@ -35,11 +36,15 @@ class AppsHorizontalController: BaseListController {
 //MARK:  Delegates Flow Layout
 extension AppsHorizontalController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellID, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellID, for: indexPath) as! AppRowCell
+        let app = appGroup?.feed.results[indexPath.item]
+        cell.nameLabel.text = app?.name
+        cell.companyLabel.text = app?.artistName
+        cell.imageView.sd_setImage(with: URL(string: app?.artworkUrl100 ?? ""))
         return cell
     }
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return appGroup?.feed.results.count ?? 0
     }
 }
 
