@@ -19,9 +19,9 @@ class BaseTabBarController: UITabBarController {
     //MARK: - Custom Methods:
     fileprivate func createNavControllers() {
         let todayNavController = createNavController(UIViewController(), title: "Today", imageName: "today_icon")
-        let appsNavController = createNavController(UIViewController(), title: "Apps", imageName: "apps")
-        let searchNavController =  createNavController(AppsSearchController(), title: "Search", imageName: "search")
-        viewControllers = [ searchNavController, todayNavController, appsNavController]
+        let appsNavController = createNavController(AppsPageController(), title: "Apps", imageName: "apps")
+        let searchNavController =  createNavController(SearchViewController(), title: "Search", imageName: "search")
+        viewControllers = [appsNavController, searchNavController, todayNavController]
     }
     fileprivate  func createNavController(_ viewController: UIViewController, title: String?, imageName: String ) -> UIViewController {
         viewController.view.backgroundColor = .white

@@ -63,7 +63,7 @@ class SearchResultCell: UICollectionViewCell {
         button.layer.masksToBounds = true
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         button.widthAnchor.constraint(equalToConstant: 80).isActive = true
-        button.backgroundColor =  .gray
+        button.backgroundColor =  .lightGray
         return button
     }()
     
