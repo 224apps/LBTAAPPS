@@ -56,6 +56,11 @@ class SearchViewController: BaseListController, UICollectionViewDelegateFlowLayo
         enterSearchTermLabel.isHidden = appResults.count != 0
         return appResults.count
     }
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+             let appID = appResults[indexPath.item].trackId
+      let appDetailsController = AppsDetailsController(appID: String(appID))
+        navigationController?.pushViewController(appDetailsController, animated: true)
+    }
     
     //MAR: UICollectionView Delegate FlowLayout
     
@@ -74,6 +79,10 @@ extension SearchViewController: UISearchBarDelegate {
         timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { (_) in
             
             Service.shared.fetchApps(searchTerm: searchText) { (res, err) in
+                
+                if let err = err {
+                    print("Failed to fetch the data", err)
+                }
                 self.appResults = res?.results ?? []
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()

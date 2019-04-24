@@ -10,9 +10,12 @@ import Foundation
 
 struct Result: Decodable {
     let trackName: String
+    let trackId: Int
     let primaryGenreName: String
     let averageUserRating: Float?
     let artworkUrl100: String
     let screenshotUrls: [String]
-    
+    let formattedPrice: String?
+    let description: String
+    let releaseNotes: String?
 }

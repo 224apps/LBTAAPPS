@@ -8,17 +8,19 @@
 
 import UIKit
 
-//MARK: - UILabel extension
+//MARK: - UILabel
 
 extension UILabel {
     
-    convenience init(text: String, font: UIFont) {
+    convenience init(text: String, font: UIFont, numberOfLines: Int = 1) {
         self.init(frame: .zero)
         self.text = text
         self.font = font
+        self.numberOfLines = numberOfLines
     }
 }
 
+//MARK: - UIImageView
 extension UIImageView {
     convenience init(cornerRadius: CGFloat) {
         self.init(image: nil)
@@ -28,9 +30,23 @@ extension UIImageView {
     }
 }
 
+//MARK: - UIButton
 extension UIButton {
     convenience init(title:String) {
         self.init(type: .system)
         self.setTitle(title, for: .normal)
+        
     }
 }
+
+//MARK: - UIStackView
+
+extension UIStackView {
+    convenience init(arrangedSubviews: [UIView], customSpacing: CGFloat = 0) {
+        self.init(arrangedSubviews:arrangedSubviews)
+        self.spacing = customSpacing
+    }
+}
+
+
+
