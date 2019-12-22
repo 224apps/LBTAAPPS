@@ -9,22 +9,44 @@
 import UIKit
 import MapKit
 import LBTATools
+import SwiftUI
 
 
-class MainController: UIViewController {
+class MainController: UIViewController{
     let mapView = MKMapView()
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(mapView)
         view.backgroundColor = .white
-        mapView.translatesAutoresizingMaskIntoConstraints = false
-        mapView.anchor(top: view.safeAreaLayoutGuide.topAnchor,
-                       leading: view.leadingAnchor, bottom: nil,
-                       trailing: view.trailingAnchor,
-                       padding: .init(top: 0, left: 0, bottom: 0, right: 0),
-                       size: .init(width: view.frame.width, height: view.frame.height))
+        mapView.fillSuperview()
         mapView.mapType = .standard
+        setupRegionForMap()
     }
     
+    fileprivate func setupRegionForMap(){
+        let center = CLLocationCoordinate2D(latitude: 37.7666, longitude: -122.427290)
+        let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+        let region = MKCoordinateRegion(center: center, span: span)
+        mapView.setRegion(region, animated: true)
+    }
+    
+}
+
+// SwiftUI Preview
+struct MainPreview: PreviewProvider {
+    static var previews: some View {
+        ContainerView()
+    }
+    
+    struct ContainerView:UIViewControllerRepresentable {
+        typealias UIViewControllerType = MainController
+        func makeUIViewController(context: UIViewControllerRepresentableContext<MainPreview.ContainerView>) -> MainController {
+            return MainController()
+        }
+        
+        func updateUIViewController(_ uiViewController: MainController, context: UIViewControllerRepresentableContext<MainPreview.ContainerView>) {
+            
+        }
+    }
 }
 
